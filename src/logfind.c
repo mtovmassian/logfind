@@ -1,27 +1,6 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include "core.h"
 
-#define MAX_STRING_SIZE 8192
-
-int search_in_line(char *pattern, char *line, int *matches, int max_matches)
-{
-    long pattern_length = strnlen(pattern, MAX_STRING_SIZE);
-
-    char *line_current = line;
-    char *match = strstr(line_current, pattern);
-    
-    int match_count = 0;
-    while (match != NULL &&  match_count < max_matches) {
-        int match_index = match - line;
-        matches[match_count] = match_index;
-        match_count++;
-        line_current = strstr(line_current, pattern) + pattern_length;
-        match = strstr(line_current, pattern);
-    }
-
-    return match_count;
-}
 
 int main(int argc, char **argv)
 {
@@ -39,7 +18,7 @@ int main(int argc, char **argv)
     
     int max_matches = line_length / pattern_length; // Can not be more matches than the ratio line_length / word_length
     int matches[max_matches];
-    int match_count  = search_in_line(pattern, line, matches, max_matches);
+    int match_count  = search_matches_in_line(pattern, line, matches, max_matches);
 
     int i;
     for (i=0; i < match_count; i++) {
