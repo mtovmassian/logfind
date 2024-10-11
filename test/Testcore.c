@@ -5,7 +5,7 @@
 void setUp (void) {} /* Is run before every test, put unit init calls here. */
 void tearDown (void) {} /* Is run after every test, put unit clean-up calls here. */
 
-void test_search_matches_in_line()
+void test_search_pattern_in_line()
 {
     char *line;
     char *pattern;
@@ -18,9 +18,9 @@ void test_search_matches_in_line()
     
     pattern = "ain";
     pattern_length = strnlen(pattern, MAX_STRING_SIZE);
-    max_matches = line_length / pattern_length;
+    max_matches = get_max_matches(pattern, line);
     int matches1[max_matches];
-    int match_count1  = search_matches_in_line(pattern, line, matches1, max_matches);
+    int match_count1  = search_pattern_in_line(pattern, line, matches1, max_matches);
     TEST_ASSERT_EQUAL(4, match_count1); // Found 4 matches
     TEST_ASSERT_EQUAL(5, matches1[0]); // First match starts at index 5
     TEST_ASSERT_EQUAL(16, matches1[1]); // Second match starts at index 16
@@ -29,9 +29,9 @@ void test_search_matches_in_line()
 
     pattern = "pain";
     pattern_length = strnlen(pattern, MAX_STRING_SIZE);
-    max_matches = line_length / pattern_length;
+    max_matches = get_max_matches(pattern, line);
     int matches2[max_matches];
-    int match_count2  = search_matches_in_line(pattern, line, matches2, max_matches);
+    int match_count2  = search_pattern_in_line(pattern, line, matches2, max_matches);
     TEST_ASSERT_EQUAL(3, match_count2); // Found 3 matches
     TEST_ASSERT_EQUAL(4, matches2[0]); // First match starts at index 4
     TEST_ASSERT_EQUAL(15, matches2[1]); // Second match starts at index 15
@@ -39,9 +39,9 @@ void test_search_matches_in_line()
 
     pattern = "paint";
     pattern_length = strnlen(pattern, MAX_STRING_SIZE);
-    max_matches = line_length / pattern_length;
+    max_matches = get_max_matches(pattern, line);
     int matches3[max_matches];
-    int match_count3  = search_matches_in_line(pattern, line, matches3, max_matches);
+    int match_count3  = search_pattern_in_line(pattern, line, matches3, max_matches);
     TEST_ASSERT_EQUAL(2, match_count3); // Found 2 matches
     TEST_ASSERT_EQUAL(4, matches3[0]); // First match starts at index 4
     TEST_ASSERT_EQUAL(15, matches3[1]); // Second match starts at index 15
@@ -51,7 +51,7 @@ int main(void)
 {
     UNITY_BEGIN();
     
-    RUN_TEST(test_search_matches_in_line);
+    RUN_TEST(test_search_pattern_in_line);
     
     UNITY_END();
     

@@ -16,9 +16,9 @@ int main(int argc, char **argv)
     long pattern_length = strnlen(pattern, MAX_STRING_SIZE);
 
     
-    int max_matches = line_length / pattern_length; // Can not be more matches than the ratio line_length / word_length
+    int max_matches = get_max_matches(pattern, line);
     int matches[max_matches];
-    int match_count  = search_matches_in_line(pattern, line, matches, max_matches);
+    int match_count  = search_pattern_in_line(pattern, line, matches, max_matches);
 
     int i;
     for (i=0; i < match_count; i++) {
