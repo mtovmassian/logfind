@@ -1,5 +1,6 @@
 #include "../unity/src/unity.h"
 #include "../src/core.h"
+#include <string.h>
 
 
 void setUp (void) {} /* Is run before every test, put unit init calls here. */
@@ -20,6 +21,7 @@ void test_search_pattern_in_line()
     pattern_length = strnlen(pattern, MAX_STRING_SIZE);
     max_matches = get_max_matches(pattern, line);
     int matches1[max_matches];
+    memset(matches1, 0, max_matches);
     int match_count1  = search_pattern_in_line(pattern, line, matches1, max_matches);
     TEST_ASSERT_EQUAL(4, match_count1); // Found 4 matches
     TEST_ASSERT_EQUAL(5, matches1[0]); // First match starts at index 5
