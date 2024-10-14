@@ -13,4 +13,6 @@ int search_pattern_in_line(char *pattern, char *line, int *matches, int max_matc
 
 int search_patterns_in_file_any(char *patterns[], int patterns_count, char *file_path);
 
+int search_patterns_in_file_all(char *patterns[], int patterns_count, char *file_path);
+
 #endif
